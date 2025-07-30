@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer'
 import HeroSection from './components/sections/HeroSection'
 import FeaturesSection from './components/sections/FeaturesSection'
 import { WelcomePage } from './pages/welcomepage'
+import { DataUploadPage } from './pages/datauploadpage'
 // import Modal from './components/ui/Modal'
 
 export default function App() {
@@ -25,6 +26,9 @@ export default function App() {
        {currentPage === 'welcome' && (<WelcomePage 
           onNavigateToUpload={() => handleNavigateToPage('upload')}
           onNavigateToDataSource={() => handleNavigateToPage('datasource')}/>)}
+        {currentPage === 'upload' && (<DataUploadPage 
+          onNavigateBack={() => handleNavigateToPage('welcome')}
+          onNavigateToInsights={() => handleNavigateToPage('insights')}/>)}
       </div>
   );
 }
