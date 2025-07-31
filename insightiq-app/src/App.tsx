@@ -7,13 +7,15 @@ import HeroSection from './components/sections/HeroSection'
 import FeaturesSection from './components/sections/FeaturesSection'
 import { WelcomePage } from './pages/welcomepage'
 import { DataUploadPage } from './pages/datauploadpage'
+import { WorkspaceDashboard } from './pages/workspacedashboard'
+import { DataSourceConnection } from './pages/datasourceconnection'
 // import Modal from './components/ui/Modal'
 
 export default function App() {
-    const [currentPage, setCurrentPage] = useState<'welcome' | 'upload' | 'insights' | 'chat' | 'story' | 'datasource' | 'querycraft'>('welcome');
+    const [currentPage, setCurrentPage] = useState<'welcome' | 'upload' | 'insights' | 'chat' | 'story' | 'workspace' | 'datasource' | 'querycraft'>('welcome');
 
 // Add console logs to track navigation
-  const handleNavigateToPage = (page: 'welcome' | 'upload' | 'insights' | 'chat' | 'story' | 'datasource' | 'querycraft') => {
+  const handleNavigateToPage = (page: 'welcome' | 'workspace' | 'upload' | 'insights' | 'chat' | 'story' | 'datasource' | 'querycraft') => {
     console.log(`Navigating to: ${page}`);
     setCurrentPage(page);
   };
@@ -24,11 +26,26 @@ export default function App() {
         Current: {currentPage}
       </div>
        {currentPage === 'welcome' && (<WelcomePage 
+       onNavigateToWorkspace={() => handleNavigateToPage('workspace')}
           onNavigateToUpload={() => handleNavigateToPage('upload')}
           onNavigateToDataSource={() => handleNavigateToPage('datasource')}/>)}
         {currentPage === 'upload' && (<DataUploadPage 
           onNavigateBack={() => handleNavigateToPage('welcome')}
           onNavigateToInsights={() => handleNavigateToPage('insights')}/>)}
+           {currentPage === 'workspace' && (
+            <WorkspaceDashboard 
+              onNavigateBack={() => handleNavigateToPage('welcome')}
+              // onOpenProject={handleOpenProjectInInsights}
+              // projects={workspaceProjects}
+              // onCreateProject={handleCreateNewProject}
+            />
+      )}
+       {currentPage === 'datasource' && (
+        <DataSourceConnection 
+          onNavigateBack={() => handleNavigateToPage('welcome')}
+          onComplete={() => handleNavigateToPage('insights')}
+        />
+      )}
       </div>
   );
 }

@@ -2,17 +2,18 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import {Brain, BarChart3, Sparkles, ArrowRight, Database, Upload } from 'lucide-react'
+import {Brain, BarChart3, Sparkles, ArrowRight, Database, Upload, FolderOpen } from 'lucide-react'
 
 interface WelcomePageProps {
   onNavigateToUpload: () => void;
   onNavigateToDataSource: () => void;
+  onNavigateToWorkspace: () => void;
 }
 
-export function WelcomePage({ onNavigateToUpload, onNavigateToDataSource }: WelcomePageProps) {
+export function WelcomePage({ onNavigateToUpload,onNavigateToWorkspace, onNavigateToDataSource }: WelcomePageProps) {
 
     return (
-    <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="max-w-6xl w-full">
@@ -34,7 +35,7 @@ export function WelcomePage({ onNavigateToUpload, onNavigateToDataSource }: Welc
                   <span className="text-blue-600">Instantly.</span>
                 </h1>
                 <p className="text-lg text-gray-600 max-w-md">
-                  Unlock powerful insights from your data using natural language queries and AI-powered analysis.
+                  Unlock powerful insights from your data using natural language queries, collaborative workspaces, and AI-powered analysis.
                 </p>
               </div>
 
@@ -42,27 +43,36 @@ export function WelcomePage({ onNavigateToUpload, onNavigateToDataSource }: Welc
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    onClick={onNavigateToDataSource}
+                   onClick={onNavigateToWorkspace}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
                   >
-                    <Database className="w-5 h-5 mr-2" />
-                    Connect Data Source
+                    <FolderOpen className="w-5 h-5 mr-2" />
+                    Open Workspace
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                   <Button 
-                    onClick={onNavigateToUpload}
+                    onClick={onNavigateToDataSource}
                     variant="outline"
                     className="border-blue-300 text-blue-700 hover:bg-blue-50 px-8 py-3 text-lg"
                   >
-                    <Upload className="w-5 h-5 mr-2" />
-                    Upload CSV File
+                    <Database className="w-5 h-5 mr-2" />
+                    Connect Data Source
                   </Button>
                 </div>
                 
-                {/* Secondary Action */}
-                <div className="flex justify-center sm:justify-start">
+                {/* Secondary Actions */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+                  <Button 
+                    onClick={onNavigateToUpload}
+                    variant="ghost"
+                    className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-6 py-2"
+                  >
+                    <Upload className="w-4 h-4 mr-2" />
+                    Upload CSV File
+                  </Button>
                   <Button 
                     variant="ghost"
+                    //onClick={handleTrySample}
                     className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-6 py-2"
                   >
                     Try Sample Dataset →
